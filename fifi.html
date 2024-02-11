@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fifi's Valentine's Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, rgba(255,105,180,0.5) 0%, rgba(255,20,147,0.5) 50%, rgba(255,255,255,0.5) 100%);
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    h1 {
+      color: #ff1493;
+    }
+    input[type="text"], input[type="number"], input[type="password"], input[type="tel"], input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      margin-right: 10px;
+      background-color: #ff1493;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #otpMessage {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #ffdfdf;
+      border: 1px solid #ff6b6b;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Khunn's love form</h1>
+    <form id="valentineForm">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+      <label for="birthday">Birthday:</label><br>
+      <input type="date" id="birthday" name="birthday" required><br>
+      <label for="phone">Phone Number:</label><br>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number"><br>
+      <button type="button" class="btn" id="sendOTPBtn">Send OTP</button>
+      <div id="otpMessage">Your OTP for Fifi's love form was 520520</div>
+      <div id="otpBox" style="display: none;">
+        <label for="otp">Enter OTP:</label><br>
+        <input type="text" id="otp" name="otp" required pattern="[0-9]{6}" title="Please enter a 6-digit OTP code"><br>
+      </div>
+      <button type="button" class="btn" id="continueBtn" disabled>Continue</button>
+    </form>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('name');
+    const birthdayInput = document.getElementById('birthday');
+    const otpInput = document.getElementById('otp');
+    const sendOTPBtn = document.getElementById('sendOTPBtn');
+    const otpMessage = document.getElementById('otpMessage');
+    const otpBox = document.getElementById('otpBox');
+    const continueBtn = document.getElementById('continueBtn');
+
+    nameInput.addEventListener('input', validateForm);
+    birthdayInput.addEventListener('input', validateForm);
+    otpInput.addEventListener('input', validateForm);
+
+    sendOTPBtn.addEventListener('click', function() {
+      // Simulate sending OTP message
+      otpMessage.style.display = 'block';
+      otpBox.style.display = 'block';
+      continueBtn.removeAttribute('disabled'); // Enable the button
+    });
+
+    function validateForm() {
+      const name = nameInput.value.trim();
+      const birthday = birthdayInput.value;
+      const otp = otpInput.value.trim();
+
+      // Check if all fields are filled correctly
+      if (name.toLowerCase() === "baby" && birthday === "1996-02-08" && otp === "520520") {
+        continueBtn.removeAttribute('disabled');
+      } else {
+        continueBtn.setAttribute('disabled', 'disabled');
+      }
+    }
+
+    continueBtn.addEventListener('click', function() {
+      // Redirect to page1.html
+      window.location.href = 'fifi2.html';
+    });
+  </script>
+</body>
+</html>
